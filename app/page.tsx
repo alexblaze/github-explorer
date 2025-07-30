@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Github, Sparkles } from "lucide-react";
 import { SearchForm } from "@/components/search-form";
@@ -10,7 +10,8 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { searchRepositories } from "@/lib/github-api";
 import type { Repository, SearchParams } from "@/types/github";
 
-export default function HomePage() {
+// Exported Page Instead of Homepage beacuse it was giving error of Suspense for useSearchParams. while building the project
+function HomePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -252,5 +253,13 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomePage />
+    </Suspense>
   );
 }
