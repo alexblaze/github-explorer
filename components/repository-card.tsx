@@ -1,15 +1,15 @@
-import Link from "next/link"
-import { Star, Eye, GitFork, ExternalLink, Calendar, Zap } from "lucide-react"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import type { Repository } from "@/types/github"
+import Link from "next/link";
+import { Star, Eye, GitFork, ExternalLink, Calendar, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import type { Repository } from "@/types/github";
 
 interface RepositoryCardProps {
-  repository: Repository
+  repository: Repository;
 }
 
 export function RepositoryCard({ repository }: RepositoryCardProps) {
-  const updatedDate = new Date(repository.updated_at).toLocaleDateString()
+  const updatedDate = new Date(repository.updated_at).toLocaleDateString();
 
   const getLanguageColor = (language: string | null) => {
     const colors: Record<string, string> = {
@@ -25,9 +25,9 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
       Ruby: "bg-red-600",
       Swift: "bg-orange-500",
       Kotlin: "bg-purple-600",
-    }
-    return colors[language || ""] || "bg-gray-500"
-  }
+    };
+    return colors[language || ""] || "bg-gray-500";
+  };
 
   return (
     <Card className="group hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm hover:scale-[1.02] relative overflow-hidden">
@@ -40,7 +40,7 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
             <div className="flex items-center gap-2">
               <Link
                 href={`/repo/${repository.owner.login}/${repository.name}`}
-                className="text-lg font-bold hover:text-primary transition-colors duration-200 group-hover:text-primary"
+                className="text-lg font-bold hover:text-primary transition-colors duration-200 group-hover:text-primary cursor-pointer"
               >
                 {repository.full_name}
               </Link>
@@ -69,7 +69,10 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
             )}
           </div>
           {repository.private && (
-            <Badge variant="outline" className="ml-2 border-amber-500/50 text-amber-600 dark:text-amber-400">
+            <Badge
+              variant="outline"
+              className="ml-2 border-amber-500/50 text-amber-600 dark:text-amber-400"
+            >
               Private
             </Badge>
           )}
@@ -79,20 +82,32 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
         <div className="flex flex-wrap items-center gap-4 text-sm">
           <div className="flex items-center gap-1.5 text-yellow-600 dark:text-yellow-400">
             <Star className="w-4 h-4" />
-            <span className="font-medium">{repository.stargazers_count.toLocaleString()}</span>
+            <span className="font-medium">
+              {repository.stargazers_count.toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400">
             <Eye className="w-4 h-4" />
-            <span className="font-medium">{repository.watchers_count.toLocaleString()}</span>
+            <span className="font-medium">
+              {repository.watchers_count.toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center gap-1.5 text-green-600 dark:text-green-400">
             <GitFork className="w-4 h-4" />
-            <span className="font-medium">{repository.forks_count.toLocaleString()}</span>
+            <span className="font-medium">
+              {repository.forks_count.toLocaleString()}
+            </span>
           </div>
           {repository.language && (
             <div className="flex items-center gap-1.5">
-              <div className={`w-3 h-3 rounded-full ${getLanguageColor(repository.language)}`}></div>
-              <span className="font-medium text-foreground/80">{repository.language}</span>
+              <div
+                className={`w-3 h-3 rounded-full ${getLanguageColor(
+                  repository.language
+                )}`}
+              ></div>
+              <span className="font-medium text-foreground/80">
+                {repository.language}
+              </span>
             </div>
           )}
           <div className="flex items-center gap-1.5 text-muted-foreground ml-auto">
@@ -102,5 +117,5 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
