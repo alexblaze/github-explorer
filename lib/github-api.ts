@@ -1,5 +1,7 @@
 import type { SearchResponse, RepositoryDetail, SearchParams } from "@/types/github"
 
+// API Documentaion referenced from https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#about-search
+
 const GITHUB_API_BASE = "https://api.github.com"
 
 class GitHubAPIError extends Error {
